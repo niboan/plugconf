@@ -1,7 +1,8 @@
-" Vim global plugin for loading dynamic configurations
-" Last Change:	2014 Aug 19
-" Maintainer:	Niels Bo Andersen <niels@niboan.dk>
-" License:	This file is placed in the public domain.
+" Vim plugin for loading dynamic configurations
+" Version:     1.0
+" Last Change: 2015-03-16
+" Author:      Niels Bo Andersen <niels@niboan.dk>
+" License:     This file is placed in the public domain.
 
 if exists("g:loaded_plugconf")
   finish
