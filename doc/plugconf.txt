@@ -1,0 +1,113 @@
+*plugconf.txt*               Plugin configuration                    2015-03-15
+
+                    PlugConf - Keeps your .vimrc clean
+
+==============================================================================
+Contents                                                   *plugconf-contents*
+
+1. Intro                                                      |plugconf-intro|
+2. Usage                                                      |plugconf-usage|
+3. Commands                                                |plugconf-commands|
+4. Configuration                                      |plugconf-configuration|
+
+==============================================================================
+1. Intro                                                      *plugconf-intro*
+
+PlugConf is a VIM plugin for managing configurations of other plugins. Plugin
+configurations are stored in separate files, and loaded only if the plugin is
+loaded.
+
+This can come in handy if you, like me, often try out new plugins, but don't
+want to mess up your .vimrc file, or if you just want to keep your .vimrc
+clean from plugin specific configuration.
+
+It's also a nice feature, if you like to have the same set of configuration
+files across multiple platforms or environments, but still load a different
+set of plugins. That way, you could have the same mappings handled by
+different plugins, only by loading them, and without having to change the
+configuration.
+
+PlugConf doesn't load your plugins, but depends on your favorite plugin
+manager to handle that. The plugin should work with the most popular plugin
+managers, including:
+
+- Pathogen
+- vim-plug
+- Vundle
+- NeoBundle
+
+Even though PlugConf relies on a plugin manager, it knows nothing about which
+one you use, as it only looks at the modified |runtimepath|. because of that,
+it should work with any plugin manager that installs plugins in a folder
+called 'bundle' in your vimfiles directory.
+
+I actually use both Pathogen and vim-plug together, and PlugConf handles both
+nicely.
+
+
+==============================================================================
+2. Usage                                                      *plugconf-usage*
+
+The plugin works by checking which plugins you have loaded, and then look for
+a configuration file for each plugin. Configurations are stored in a folder
+called 'plugconf' in your vimfiles folder.
+
+So, if you loaded the plugin 'foo', and your plugconf folder contains a file
+called 'foo.vim', this file will be loaded.
+
+The plugin is invoked by adding the following line to your .vimrc:
+>
+    call plugconf#load()
+<
+Note: Be sure to add the line after loading plugins with your plugin manager.
+
+First time you load PlugConf, the 'plugconf' folder will be created, if it
+does not already exist.
+
+With PlugConf loaded, you can use the |:PlugConfEdit| command to edit your
+configurations.
+
+If you're in a GUI, the plugin also adds a nice submenu under the 'Plugin'
+menu, with shortcuts to the configuration files for all loaded plugins.
+
+
+==============================================================================
+3. Commands                                                *plugconf-commands*
+
+                                                                   *:PlugConf*
+:PlugConf 		Load plugin configurations. Can be called after
+			loading new plugins, provided that your configuration
+                        files are idempotent.
+
+                                                               *:PlugConfList*
+:PlugConfList		Display a list of loaded plugin configurations, along
+			with configuration file locations.
+
+                                                               *:PlugConfEdit*
+:PlugConfEdit {plugin}	Edit the configuration file for {plugin}. Takes the
+			hassle out of finding the correct name for the
+                        configuration file. Supports tab-completion for your
+                        currently loaded plugins.
+
+
+==============================================================================
+4. Configuration                                      *plugconf-configuration*
+
+PlugConf currently have two configuration options, more will be added in the
+future.
+
+                                                             *g:plugconf_path*  >
+    let g:plugconf_path = 'plugconf'
+<
+        The folder in your vimfiles directory, in which to store your
+        configuration files. The default is 'plugconf'.
+
+
+                                                             *g:plugconf_menu*  >
+    let g:plugconf_menu = 1
+<
+        If set to 1 (the default), a GUI menu with shortcuts to configuration
+        files is created. If set to 0, no menu is created.
+
+
+ vim:tw=78:ts=8:noet:ft=help:
